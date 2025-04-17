@@ -19,11 +19,13 @@ public class Peace : MonoBehaviour
 
     private bool isState = false;
 
-    private void Awake() {
-        
+    private void Awake()
+    {
+
     }
 
-    public void stateDone(bool done) {
+    public void stateDone(bool done)
+    {
         isState = done;
     }
 
@@ -47,8 +49,10 @@ public class Peace : MonoBehaviour
 
     public void Move()
     {
-        if (isRun == false) {
-            if (stackDir.Count > 0) {
+        if (isRun == false)
+        {
+            if (stackDir.Count > 0)
+            {
                 changeTaret(stackDir[0]);
                 stackDir.RemoveAt(0);
                 isRun = true;
@@ -56,18 +60,22 @@ public class Peace : MonoBehaviour
         }
         var step = moveSpeed * Time.deltaTime;
         this.transform.position = Vector2.MoveTowards(this.transform.position, targetLocal, step);
-        if(Vector2.Distance(this.transform.position, targetLocal) < 0.0001f) {
+        if (Vector2.Distance(this.transform.position, targetLocal) < 0.0001f)
+        {
             isRun = false;
-        } 
+            gridManager.setGrid((int)targetLocal.x, (int)targetLocal.y, 2);
+
+        }
     }
 
-    public void addTarget(string direct) {
+    public void addTarget(string direct)
+    {
         stackDir.Add(direct);
     }
 
     public void changeTaret(string direct)
     {
-        
+
         if (!canMove(direct))
         {
             // Debug.Log("loi cai" + type);
@@ -127,7 +135,6 @@ public class Peace : MonoBehaviour
             targetLocal -= new Vector2(0, 1);
             posMap -= new Vector2(0, 1);
         }
-        gridManager.setGrid((int)posMap.x, (int)posMap.y, 2);
         // Debug.Log(posMap + "  " + type);
 
     }
@@ -154,12 +161,13 @@ public class Peace : MonoBehaviour
 
 
 
-    public bool isPeace(int x, int y) {
+    public bool isPeace(int x, int y)
+    {
         if (x == posMap.x && y == posMap.y) return true;
         else return false;
     }
 
-  
+
 
 
 }
